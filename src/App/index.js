@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import List from './List';
+import Form from './Form';
 
 class App extends Component {
   state = {
@@ -27,6 +28,17 @@ class App extends Component {
     });
   }
 
+  addItem = text => {
+    this.setState({
+      ...this.state,
+      todos: {
+        ...this.state.todos,
+        5: { text, done: false },
+      },
+      todoOrder: [...this.state.todoOrder, '5'],
+    })
+  }
+
   render() {
     const list = this.state.todoOrder.map(id => ({
       id, ...this.state.todos[id],
@@ -38,6 +50,7 @@ class App extends Component {
           <h1 className="App-title">Lancaster Dapp Study Group Todos</h1>
         </div>
         <article className="App-body">
+          <Form onSubmit={this.addItem}/>
           <List items={list} updateItem={this.updateItem}/>
         </article>
       </div>
