@@ -1,0 +1,9 @@
+.Checkbox {
+  display: inline-block;
+  width: 1.5em;
+  text-align: center;
+}
+
+.Checkbox input {
+  vertical-align: middle;
+}

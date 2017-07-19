@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import './Form.css';
 
 export default class Form extends React.Component {
   static propTypes = {
@@ -22,8 +23,10 @@ export default class Form extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.submit}>
-        <input type="text" value={this.state.text} onChange={this.change}/>
+      <form className="Form" onSubmit={this.submit}>
+        <p>
+          <input placeholder="What needs to be done?" value={this.state.text} onChange={this.change}/>
+        </p>
       </form>
     );
   }

@@ -1,0 +1,9 @@
+.Form input {
+  font-size: inherit;
+  width: 100%;
+  padding: 0.5em;
+  padding-left: 1.5em;
+  border-radius: 3px;
+  border: 1px solid #ddd;
+  background-color: #fefefe;
+}
