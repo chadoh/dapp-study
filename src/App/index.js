@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import './App.css';
-import List from './List';
-import Form from './Form';
 import uuid from 'uuid/v4';
+
+import Form from './Form';
+import List from './List';
+
+import './App.css';
 
 class App extends Component {
   state = {
