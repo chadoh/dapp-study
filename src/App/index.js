@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import List from './List';
 import Form from './Form';
+import uuid from 'uuid/v4';
 
 class App extends Component {
   state = {
@@ -29,13 +30,15 @@ class App extends Component {
   }
 
   addItem = text => {
+    const id = uuid();
+
     this.setState({
       ...this.state,
       todos: {
         ...this.state.todos,
-        5: { text, done: false },
+        [id]: { text, done: false },
       },
-      todoOrder: [...this.state.todoOrder, '5'],
+      todoOrder: [...this.state.todoOrder, id],
     })
   }
 
