@@ -1,29 +1,34 @@
 import React, { Component } from 'react';
 import uuid from 'uuid/v4';
 
+import { fetchData, setData } from '../helpers/database';
 import Form from './Form';
 import List from './List';
 
 import './App.css';
 
 class App extends Component {
-  state = {
-    todos: {
-      1: { text: "Write README", done: true },
-      2: { text: "Create starter React app", done: true },
-      3: { text: "Build todo app", done: false },
-      4: { text: "Store todos in localStorage", done: false },
-    },
-    todoOrder: ["1", "2", "3", "4"],
-  };
+
+  componentDidMount() {
+    window.addEventListener('DatabaseUpdatedEvent', this.rerender, false);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('DatabaseUpdatedEvent', this.rerender, false);
+  }
+
+  rerender = () => {
+    this.forceUpdate();
+  }
 
   updateItem = (id, changes) => {
-    const { todos } = this.state;
+    const data = fetchData();
+    const { todos } = data;
 
     if (!todos[id]) throw new Error("Can't find item with id=" + id);
 
-    this.setState({
-      ...this.state,
+    setData({
+      ...data,
       todos: {
         ...todos,
         [id]: {...todos[id], ...changes}
@@ -32,21 +37,23 @@ class App extends Component {
   }
 
   addItem = text => {
+    const data = fetchData();
     const id = uuid();
 
-    this.setState({
-      ...this.state,
+    setData({
+      ...data,
       todos: {
-        ...this.state.todos,
+        ...data.todos,
         [id]: { text, done: false },
       },
-      todoOrder: [...this.state.todoOrder, id],
+      todoOrder: [...data.todoOrder, id],
     })
   }
 
   render() {
-    const list = this.state.todoOrder.map(id => ({
-      id, ...this.state.todos[id],
+    const data = fetchData();
+    const list = data.todoOrder.map(id => ({
+      id, ...data.todos[id],
     }));
 
     return (
