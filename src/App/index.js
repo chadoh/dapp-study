@@ -14,11 +14,13 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
+      <div>
         <div className="App-header">
           <h1 className="App-title">Lancaster Dapp Study Group Todos</h1>
         </div>
-        <List items={this.state.todos}/>
+        <article className="App-body">
+          <List items={this.state.todos}/>
+        </article>
       </div>
     );
   }
