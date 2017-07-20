@@ -50,6 +50,20 @@ class App extends Component {
     })
   }
 
+  removeItem = id => {
+    const data = fetchData();
+
+    const todos = data.todos;
+    delete todos[id];
+
+    const index = data.todoOrder.indexOf(id);
+    const todoOrder = data.todoOrder.slice(0, index).concat(
+      data.todoOrder.slice(index + 1)
+    );
+
+    setData({ ...data, todos, todoOrder })
+  }
+
   render() {
     const data = fetchData();
     const list = data.todoOrder.map(id => ({
@@ -63,7 +77,11 @@ class App extends Component {
         </div>
         <article className="App-body">
           <Form onSubmit={this.addItem}/>
-          <List items={list} updateItem={this.updateItem}/>
+          <List
+            items={list}
+            updateItem={this.updateItem}
+            removeItem={this.removeItem}
+          />
         </article>
       </div>
     );

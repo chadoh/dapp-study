@@ -1,0 +1,9 @@
+.DeleteButton {
+  background: none;
+  border: none;
+  font-size: inherit;
+  vertical-align: top;
+  float: right;
+  color: rgba(0,0,0,0.5);
+  cursor: pointer;
+}
