@@ -5,3 +5,7 @@ body {
   font-size: calc(.85em + 1vw);
   line-height: 1.5;
 }
+
+* {
+  box-sizing: border-box;
+}
