@@ -1,7 +1,7 @@
 import { loadState, saveState } from './localStorage';
 
-const SAVE_SUCCESS = new CustomEvent('DatabaseSaveSuccessEvent');
-const SAVE_FAIL = new CustomEvent('DatabaseSaveFailEvent');
+export const SAVE_SUCCESS = 'DatabaseSaveSuccessEvent';
+export const SAVE_FAIL = 'DatabaseSaveFailEvent';
 
 const initialState = {
   todos: {},
@@ -15,8 +15,8 @@ export const fetchData = () => {
 export const setData = (newData) => {
   try {
     saveState(newData);
-    window.dispatchEvent(SAVE_SUCCESS);
+    window.dispatchEvent(new CustomEvent(SAVE_SUCCESS));
   } catch (err) {
-    window.dispatchEvent(SAVE_FAIL);
+    window.dispatchEvent(new CustomEvent(SAVE_FAIL));
   }
 }

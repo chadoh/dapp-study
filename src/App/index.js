@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import uuid from 'uuid/v4';
 
-import { fetchData, setData } from '../database';
+import { SAVE_SUCCESS, fetchData, setData } from '../database';
 import Form from './Form';
 import List from './List';
 
@@ -10,11 +10,11 @@ import './App.css';
 class App extends Component {
 
   componentDidMount() {
-    window.addEventListener('DatabaseSaveSuccessEvent', this.rerender, false);
+    window.addEventListener(SAVE_SUCCESS, this.rerender, false);
   }
 
   componentWillUnmount() {
-    window.removeEventListener('DatabaseSaveSuccessEvent', this.rerender, false);
+    window.removeEventListener(SAVE_SUCCESS, this.rerender, false);
   }
 
   rerender = () => {
