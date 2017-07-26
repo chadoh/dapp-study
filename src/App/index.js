@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import uuid from 'uuid/v4';
 
-import createDatabase, { SAVE_SUCCESS } from '../database';
+import createDatabase from '../database';
 import Form from './Form';
 import List from './List';
 
@@ -17,11 +17,11 @@ const db = createDatabase({initialState});
 class App extends Component {
 
   componentDidMount() {
-    window.addEventListener(SAVE_SUCCESS, this.rerender, false);
+    db.addSaveSuccessListener(this.rerender);
   }
 
   componentWillUnmount() {
-    window.removeEventListener(SAVE_SUCCESS, this.rerender, false);
+    db.removeSaveSuccessListener(this.rerender);
   }
 
   rerender = () => {

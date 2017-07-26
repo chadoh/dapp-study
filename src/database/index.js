@@ -1,7 +1,7 @@
 import { loadState, saveState } from './localStorage';
 
-export const SAVE_SUCCESS = 'DatabaseSaveSuccessEvent';
-export const SAVE_FAIL = 'DatabaseSaveFailEvent';
+const SAVE_SUCCESS = 'DatabaseSaveSuccessEvent';
+const SAVE_FAIL = 'DatabaseSaveFailEvent';
 
 let id = 0;
 
@@ -24,6 +24,14 @@ class Database {
     } catch (err) {
       window.dispatchEvent(new CustomEvent(SAVE_FAIL));
     }
+  }
+
+  addSaveSuccessListener(func) {
+    window.addEventListener(SAVE_SUCCESS, func, false);
+  }
+
+  removeSaveSuccessListener(func) {
+    window.removeEventListener(SAVE_SUCCESS, func, false);
   }
 
 }
