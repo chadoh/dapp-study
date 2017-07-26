@@ -1,11 +1,18 @@
 import React, { Component } from 'react';
 import uuid from 'uuid/v4';
 
-import { SAVE_SUCCESS, fetchData, setData } from '../database';
+import createDatabase, { SAVE_SUCCESS } from '../database';
 import Form from './Form';
 import List from './List';
 
 import './App.css';
+
+const initialState = {
+  todos: {},
+  todoOrder: [],
+};
+
+const db = createDatabase({initialState});
 
 class App extends Component {
 
@@ -22,12 +29,12 @@ class App extends Component {
   }
 
   updateItem = (id, changes) => {
-    const data = fetchData();
+    const data = db.fetchData();
     const { todos } = data;
 
     if (!todos[id]) throw new Error("Can't find item with id=" + id);
 
-    setData({
+    db.setData({
       ...data,
       todos: {
         ...todos,
@@ -37,10 +44,10 @@ class App extends Component {
   }
 
   addItem = text => {
-    const data = fetchData();
+    const data = db.fetchData();
     const id = uuid();
 
-    setData({
+    db.setData({
       ...data,
       todos: {
         ...data.todos,
@@ -51,7 +58,7 @@ class App extends Component {
   }
 
   removeItem = id => {
-    const data = fetchData();
+    const data = db.fetchData();
 
     const todos = data.todos;
     delete todos[id];
@@ -61,11 +68,11 @@ class App extends Component {
       data.todoOrder.slice(index + 1)
     );
 
-    setData({ ...data, todos, todoOrder })
+    db.setData({ ...data, todos, todoOrder })
   }
 
   render() {
-    const data = fetchData();
+    const data = db.fetchData();
     const list = data.todoOrder.map(id => ({
       id, ...data.todos[id],
     }));
