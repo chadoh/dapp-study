@@ -8,7 +8,7 @@ export default ({items, updateItem, removeItem}) => (
     {items.map(({id, text, done}) =>
       <Item key={id} done={done} onChange={updateItem.bind(null, id)}>
         {text}
-        <DeleteButton onClick={removeItem.bind(null, id)} />
+        <DeleteButton onClick={() => removeItem(id)} />
       </Item>
     )}
   </ol>
